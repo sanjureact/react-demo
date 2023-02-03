@@ -16,8 +16,9 @@ export const PrivateRoute = () => {
   useEffect(() => {
     checkUserToken();
   }, [isLoggedIn]);
+
   const auth = true; // determine if authorized, from context or however you're doing it
   // If authorized, return an outlet that will render child elements
   // If not, return element that will navigate to login page
-  return isLoggedIn ? <Layout /> : <Navigate to="/login" />;
+  return isLoggedIn ? <Layout /> : <Navigate to="/login" replace />;
 };

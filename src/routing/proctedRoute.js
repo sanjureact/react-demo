@@ -18,7 +18,11 @@ const ProtectedRoute = (props) => {
   }, [location, isLoggedIn]);
   return (
     <React.Fragment>
-      {isLoggedIn ? <Layout /> : <Navigate to="/" replace />}
+      {isLoggedIn ? (
+        <Layout />
+      ) : (
+        <Navigate to="/login" replace state={{ path: location.pathname }} />
+      )}
     </React.Fragment>
   );
 };

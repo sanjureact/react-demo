@@ -1,4 +1,4 @@
-import { apiData, apiInstance } from "../../Config/Config";
+import { apiInstance } from "../../Api/Api";
 import {
   POST_FAIL_DATA,
   POST_REQUEST_DATA,
