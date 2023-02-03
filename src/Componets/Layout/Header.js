@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Post from "../Posts/Post";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   return (
     <>
       <header>
@@ -49,6 +55,7 @@ export default function Header() {
                 <h1 className="mb-5">This is title</h1>
               </div>
             </div>
+            <button onClick={logout}> logout</button>
           </div>
         </div>
       </header>

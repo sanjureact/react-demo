@@ -7,24 +7,33 @@ import Home from "./Componets/Home";
 import Blog from "./Componets/Blog";
 import { PrivateRoute } from "./routing/PrivateRoute";
 import Login from "./Auth/Login";
-import { Fragment } from "react";
+
+import ProtectedRoute from "./routing/proctedRoute";
 function App() {
   return (
     <div>
-      {/* <Layout /> */}
       <BrowserRouter>
-        <Fragment>
-          <Routes>
-            <Route element={<PrivateRoute />}>
-              <Route exact path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="/blogs" element={<Blog />} />
-              </Route>
+        <Routes>
+          <Route
+            path=""
+            element={
+              <ProtectedRoute>
+                {/* <Home /> */}
+                <Route path="/" element={<Home />} />
+                <Route path="/post" element={<Post />} />
+              </ProtectedRoute>
+            }
+          />
+          {/* </Route> */}
+          {/* <Route element={<Layout />}>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/post" element={<Post />} />
+              <Route path="/blogs" element={<Blog />} />
             </Route>
-            <Route exact path="/post" element={<Post />} />
-            <Route exact path="/login" element={<Login />} />
-          </Routes>
-        </Fragment>
+          </Route> */}
+          <Route path="/login" element={<Login />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
