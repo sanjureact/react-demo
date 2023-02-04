@@ -27,7 +27,8 @@ export default function Login() {
           return;
         }
         localStorage.clear();
-        localStorage.setItem("user-token", token);
+        localStorage.setItem("user", JSON.stringify(token));
+
         setTimeout(() => {
           navigate("/");
         }, 500);

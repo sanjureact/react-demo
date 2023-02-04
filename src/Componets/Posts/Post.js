@@ -4,7 +4,7 @@ import { postsActionData } from "../../Redux/Action/ActionPost";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 export default function Post() {
-  const post_item = useSelector((state) => state.PostReducerData);
+  const post_item = useSelector((state) => state.PostDataState);
   console.log(post_item?.data, "post----");
   const dispatch = useDispatch();
 

@@ -1,0 +1,19 @@
+import React from "react";
+
+export const SIGNIN_REQUEST = "SIGNIN_REQUEST";
+export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
+export const SIGNIN_FAIL = "SIGNIN_FAIL";
+export const SIGNOUT_SUCCESS = "SIGNOUT_SUCCESS";
+export const SIGNOUT_FAIL = "SIGNOUT_FAIL";
+
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAIL = "SIGNUP_FAIL";
+
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAIL = "LOGOUT_FAIL";
+
+export const FORGOT_PASS_REQUEST = "FORGOT_PASS_REQUEST";
+export const FORGOT_PASS_SUCCESS = "FORGOT_PASS_SUCCESS";
+export const FORGOT_PASS_FAIL = "FORGOT_PASS_FAIL";
