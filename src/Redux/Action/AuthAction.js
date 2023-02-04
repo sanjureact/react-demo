@@ -21,9 +21,7 @@ export const loginAction = (payload) => async (dispatch) => {
       type: SIGNIN_REQUEST,
     });
     if (data && data?.status === true) {
-      localStorage.setItem("user", data?.data);
-
-      localStorage.setItem("user", JSON.stringify(data?.data));
+      localStorage.setItem("user", JSON.stringify(data.token));
       console.log(data?.data, "user");
       dispatch({
         type: SIGNIN_SUCCESS,
@@ -41,7 +39,7 @@ export const loginAction = (payload) => async (dispatch) => {
 
 export const signUpAction = (payload) => async (dispatch) => {
   try {
-    let data = await POSTAPI("/signup");
+    let data = await POSTAPI("/signup", payload);
     dispatch({
       type: SIGNUP_REQUEST,
     });
@@ -60,7 +58,7 @@ export const signUpAction = (payload) => async (dispatch) => {
 
 export const forgotPassAction = (payload) => async (dispatch) => {
   try {
-    let data = await POSTAPI("/forgot-pass");
+    let data = await POSTAPI("/forgot-pass", payload);
     dispatch({
       type: FORGOT_PASS_REQUEST,
     });

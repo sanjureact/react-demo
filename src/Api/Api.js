@@ -27,40 +27,34 @@ const instancseApiData = axios.create({
   },
 });
 
-export const apiInstance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 export const POSTAPI = (URL, param, toastStatus) => {
   const promise = instancseApi.post(URL, param, {
     validateStatus: (status) => status >= 200 && status < 600,
   });
-  const dataPromise = promise.then((res) => {
-    // console.log(res.data.data, "res");
-    if (res.status === 200) {
-      console.log("success");
-      if (res?.data?.status) {
-        // toastStatus("sucesss");
-        console.log("sucesss");
-
-        return res?.data?.data;
-      } else {
-        res?.data?.message;
-        console.log("error");
+  const dataPromise = promise.then(
+    res.then((res) => {
+      if (res.status === 200 || res.status === 600) {
+        console.log("success");
+        if (res?.data?.status) {
+          console.log("sucesss");
+          return res?.data;
+        } else {
+          res?.data?.message;
+          console.log("error");
+          return res?.data;
+        }
+      } else if (res?.status === 400) {
+        console.log("bad request");
+        return res?.data;
+      } else if (res?.status === 401) {
+        console.log("unAuthorise error");
+        return res?.data;
+      } else if (res?.status === 500) {
+        console.log("server error");
+        return res?.data;
       }
-    } else if (res?.status === 400) {
-      console.log('"bad request"');
-      return res?.data;
-    } else if (res?.status === 401) {
-      console.log("unAuthorise error");
-      return res?.data;
-    } else if (res?.status === 500) {
-      console.log("server error");
-      return res?.data;
-    }
-  });
+    })
+  );
   return dataPromise;
 };
 
@@ -88,3 +82,10 @@ export const POSTAPIDATA = (URL, param, toastStatus) => {
   });
   return dataPromise;
 };
+
+export const apiInstance = axios.create({
+  baseURL: "https://jsonplaceholder.typicode.com/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});

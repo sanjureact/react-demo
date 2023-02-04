@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loginAction } from "../Redux/Action/AuthAction";
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
@@ -9,11 +12,38 @@ export default function Login() {
 
   const [message, setMessage] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const { login_status, login_loading } = useSelector(
+    (state) => state.AuthLoginStateData
+  );
+  // console.log(login_status, login_loading);
+
+  // useEffect(() => {
+  //   let usertoken = JSON.parse(localStorage.getItem("user"));
+  //   if (usertoken) {
+  //     return;
+  //   }
+  // }, [login_status, login_loading]);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    setMessage(true);
+    if (user.email && user.password) {
+      dispatch(loginAction(user));
+      setTimeout(() => {
+        navigate(state?.path || "/");
+      }, 500);
+    }
+  };
+
   const handOnchange = (e) => {
     const { value, name } = e.target;
     setUser({ ...user, [name]: value });
     console.log(value);
   };
+
+  // without redux
   const handlSubmit = (e) => {
     e.preventDefault();
     setMessage(true);
@@ -26,7 +56,6 @@ export default function Login() {
           alert("Unable to login. Please try after some time.");
           return;
         }
-        localStorage.clear();
         localStorage.setItem("user", JSON.stringify(token));
 
         setTimeout(() => {
@@ -38,6 +67,7 @@ export default function Login() {
         alert("Oops! Some error occured.");
       });
   };
+
   return (
     <section className="vh-100" style={{ backgroundColor: "#508bfc" }}>
       <div className="container py-5 h-100">
@@ -47,10 +77,7 @@ export default function Login() {
               className="card shadow-2-strong"
               style={{ borderRadius: "1rem" }}
             >
-              <form
-                className="card-body p-5 text-center"
-                onSubmit={handlSubmit}
-              >
+              <form className="card-body p-5 text-center" onSubmit={submitForm}>
                 <h3 className="mb-5">Sign in</h3>
 
                 <div className="form-outline mb-4">

@@ -14,24 +14,12 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route
-            path=""
-            element={
-              <ProtectedRoute>
-                {/* <Home /> */}
-                <Route path="/" element={<Home />} />
-                <Route path="/post" element={<Post />} />
-              </ProtectedRoute>
-            }
-          />
-          {/* </Route> */}
-          {/* <Route element={<Layout />}>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/post" element={<Post />} />
-              <Route path="/blogs" element={<Blog />} />
-            </Route>
-          </Route> */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/post" element={<Post />} />
+            <Route path="/blogs" element={<Blog />} />
+          </Route>
+
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
