@@ -1,4 +1,4 @@
-import { POSTAPI } from "../../Api/Api";
+import { instancseApi, POSTAPI } from "../../Api/Api";
 import {
   FORGOT_PASS_FAIL,
   FORGOT_PASS_REQUEST,
@@ -15,14 +15,19 @@ import {
 
 export const loginAction = (payload) => async (dispatch) => {
   try {
-    let data = await POSTAPI("/login", payload);
-    console.log(data, "data");
     dispatch({
       type: SIGNIN_REQUEST,
     });
+    let data = await instancseApi.post("/login", payload).then((res) => {
+      const data = res.data;
+      const token = data.token;
+      localStorage.setItem("user", JSON.stringify(token));
+    });
+    console.log(data.data, "data");
+
     if (data && data?.status === true) {
-      localStorage.setItem("user", JSON.stringify(data.token));
-      console.log(data?.data, "user");
+      // localStorage.setItem("user", JSON.stringify(data.token));
+      // console.log(data?.data, "data");
       dispatch({
         type: SIGNIN_SUCCESS,
         data: data?.data,

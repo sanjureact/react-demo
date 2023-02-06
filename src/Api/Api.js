@@ -2,7 +2,7 @@ import axios from "axios";
 import { Base_Url } from "../Config/Config";
 import { toast } from "react-toastify";
 
-const instancseApi = axios.create({
+export const instancseApi = axios.create({
   baseURL: Base_Url,
   headers: {
     Accept: "application/json",
@@ -28,19 +28,18 @@ const instancseApiData = axios.create({
   },
 });
 
-export const POSTAPI = (URL, param, toastStatus) => {
+export const POSTAPI = (URL, param) => {
   const promise = instancseApi.post(URL, param, {
     validateStatus: (status) => status >= 200 && status < 600,
   });
   const dataPromise = promise.then((res) => {
     if (res.status === 200 || res.status === 600) {
-      console.log("success");
       if (res?.data?.status) {
         console.log(res?.data.status);
         return res?.data;
       } else {
         res?.data?.msg;
-        toast(res?.data?.msg);
+        console.log(res?.data?.msg);
         return res?.data;
       }
     } else if (res?.status === 400) {
@@ -65,17 +64,17 @@ export const POSTAPIDATA = (URL, param) => {
     if (res.status === 200) {
       console.log("sucess");
       if (res?.data?.status) {
-        toast("sucesss");
+        console.log("sucesss");
         return res?.data?.data;
       } else {
         res?.data?.msg;
-        toast(res?.data?.msg);
+        console.log(res?.data?.msg);
       }
     } else if (res?.status === 400) {
-      toast("bad request");
+      console.log("bad request");
       return res?.data;
     } else if (res?.status === 500) {
-      toast("internal server error");
+      console.log("internal server error");
       return res?.data;
     }
   });

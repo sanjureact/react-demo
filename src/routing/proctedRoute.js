@@ -10,8 +10,9 @@ const useAuth = () => {
     return false;
   }
 };
+
 const ProtectedRoute = (props) => {
-  const auth = useAuth();
+  const auth = JSON.parse(localStorage.getItem("user"));
   return (
     <React.Fragment>
       {auth ? (
