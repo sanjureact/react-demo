@@ -67,12 +67,10 @@ export const forgotPassAction = (payload) => async (dispatch) => {
         type: FORGOT_PASS_SUCCESS,
         data: data.data,
       });
-    }
-    if (data?.status === true) {
-      dispatch({
-        type: FORGOT_PASS_FAIL,
-        data: [],
-      });
-    }
+    } else data?.status === true;
+    dispatch({
+      type: FORGOT_PASS_FAIL,
+      data: [],
+    });
   } catch (error) {}
 };

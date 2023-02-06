@@ -7,8 +7,11 @@ import Home from "./Componets/Home";
 import Blog from "./Componets/Blog";
 import { PrivateRoute } from "./routing/PrivateRoute";
 import Login from "./Auth/Login";
-
 import ProtectedRoute from "./routing/proctedRoute";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// toast.configure();
+
 function App() {
   return (
     <div>
