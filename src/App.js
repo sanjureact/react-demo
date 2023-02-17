@@ -10,20 +10,24 @@ import Login from "./Auth/Login";
 import ProtectedRoute from "./routing/proctedRoute";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./Componets/Dashboard";
+import Signup from "./Auth/Signup";
 // toast.configure();
 
 function App() {
   return (
     <div>
+      {/* <Home /> */}
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/post" element={<Post />} />
             <Route path="/blogs" element={<Blog />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </div>

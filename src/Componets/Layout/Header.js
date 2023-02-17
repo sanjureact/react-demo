@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Post from "../Posts/Post";
 
 export default function Header() {
@@ -11,7 +11,10 @@ export default function Header() {
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand-lg fixed-top navbar-scroll">
+        <nav
+          className="navbar navbar-expand-lg fixed-top navbar-scroll"
+          style={{ backgroundColor: "blanchedalmond" }}
+        >
           <div className="container-fluid">
             <button
               className="navbar-toggler ps-0"
@@ -29,9 +32,19 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarExample01">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item active">
-                  <a className="nav-link" aria-current="page" href="#intro">
-                    Home
-                  </a>
+                  <Link to="/" className="nav-link">
+                    Dashboard
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/post" className="nav-link">
+                    post
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/blogs">
+                    Blog
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a
@@ -43,12 +56,18 @@ export default function Header() {
                     Learn redux
                   </a>
                 </li>
+                <li className="nav-item">
+                  <button type="button" class="btn btn" onClick={logout}>
+                    {" "}
+                    logout
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
         </nav>
 
-        <div id="intro" className="bg-image">
+        {/* <div id="intro" className="bg-image">
           <div className="mask text-white">
             <div className="container d-flex align-items-center text-center h-100">
               <div>
@@ -57,7 +76,7 @@ export default function Header() {
             </div>
             <button onClick={logout}> logout</button>
           </div>
-        </div>
+        </div> */}
       </header>
     </>
   );

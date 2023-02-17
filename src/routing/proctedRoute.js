@@ -13,6 +13,7 @@ const useAuth = () => {
 
 const ProtectedRoute = (props) => {
   const auth = JSON.parse(localStorage.getItem("user"));
+  const isAuth = useAuth();
   return (
     <React.Fragment>
       {auth ? (
