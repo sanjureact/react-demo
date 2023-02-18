@@ -17,7 +17,6 @@ import Signup from "./Auth/Signup";
 function App() {
   return (
     <div>
-      {/* <Home /> */}
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
@@ -28,6 +27,7 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          {/* <Route path="/home" element={<Home />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

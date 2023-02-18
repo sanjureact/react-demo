@@ -71,7 +71,7 @@ export default function Post() {
     <div>
       Post
       <label htmlFor="search">
-        Search by Task:
+        Search by Title:
         <input id="search" type="text" onChange={handleSearch} value={search} />
       </label>
       {post_item?.data?.data ? (

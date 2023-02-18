@@ -13,7 +13,7 @@ export default function Header() {
       <header>
         <nav
           className="navbar navbar-expand-lg fixed-top navbar-scroll"
-          style={{ backgroundColor: "blanchedalmond" }}
+          style={{ backgroundColor: "#e3e2e0" }}
         >
           <div className="container-fluid">
             <button
@@ -57,7 +57,7 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <button type="button" class="btn btn" onClick={logout}>
+                  <button type="button" className="btn btn" onClick={logout}>
                     {" "}
                     logout
                   </button>
