@@ -46,7 +46,7 @@ export default function Sidebar() {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/blogs" className="nav-link px-0">
+                      <Link to="/bloglist" className="nav-link px-0">
                         {" "}
                         Blogs{" "}
                       </Link>
@@ -54,7 +54,7 @@ export default function Sidebar() {
                   </ul>
                 </li>
                 <li>
-                  <Link to="#" className="nav-link px-0 align-middle">
+                  <Link to="orderlist" className="nav-link px-0 align-middle">
                     <i className="fs-4 bi-table"></i>{" "}
                     <span className="ms-1 d-none d-sm-inline">Orders</span>
                   </Link>

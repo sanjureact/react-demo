@@ -9,6 +9,7 @@ export const postsActionData = () => {
   try {
     return async function (dispatch) {
       const data = await apiInstance.get("/posts");
+      console.log(data, "data----");
       dispatch({
         type: POST_REQUEST_DATA,
         payload: data,

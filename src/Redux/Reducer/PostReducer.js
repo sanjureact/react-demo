@@ -15,8 +15,8 @@ export const PostReducerData = (state = initailState, action) => {
   if (action.type === POST_REQUEST_DATA) {
     return {
       ...state,
-      status: true,
-      loading: false,
+      // status: true,
+      loading: true,
       data: action.payload,
     };
   }

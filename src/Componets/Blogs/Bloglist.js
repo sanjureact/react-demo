@@ -1,33 +1,27 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postsActionData } from "../../Redux/Action/ActionPost";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import Pagination from "../Pagination";
-export default function Post() {
+import { blogDeleteData, blogsActionData } from "../../Redux/Action/ActionBlog";
+import { Link, useParams } from "react-router-dom";
+export default function Bloglist() {
   const [blogPosts, setBlogPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [search, setSearch] = useState("");
-  const post_item = useSelector((state) => state.PostDataState);
-  console.log(post_item?.data?.data, "post----");
-  // console.log(blogPosts, "blogPosts");
+  const blogs_item = useSelector((state) => state.BlogsDataState);
+  console.log(blogs_item?.data?.data, "post----");
+
+  const delete_item = useSelector((state) => state.BlogDeleteState);
+  console.log(delete_item, "delete_item");
   const dispatch = useDispatch();
+  const id = useParams();
 
-  const getApidata = () => {
-    dispatch(postsActionData());
-  };
-
-  const apiResponse = () => {
-    axios("https://jsonplaceholder.typicode.com/posts").then((response) =>
-      // console.log(response)
-      setBlogPosts(response.data)
-    );
-  };
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   // const currentPosts = blogPosts?.slice(indexOfFirstPost, indexOfLastPost);
-  const currentPost = post_item?.data?.data?.slice(
+  const currentPost = blogs_item?.data?.data?.slice(
     indexOfFirstPost,
     indexOfLastPost
   );
@@ -35,10 +29,18 @@ export default function Post() {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  // console.log(currentPage, "currentPage");
+
+  if (delete_item) {
+    console.log("deleted");
+  }
+  const deleteData = () => {
+    dispatch(blogDeleteData(id));
+    console.log(id, "id---");
+  };
+
   useEffect(() => {
-    getApidata();
-    // apiResponse();
+    dispatch(blogsActionData());
+    deleteData();
   }, []);
 
   const previousPage = () => {
@@ -56,30 +58,29 @@ export default function Post() {
     setSearch(event.target.value);
   };
 
-  const fiterData = () => {
-    if (search) {
-      currentPost.filter((elm) => {
-        return (
-          elm.title.toLowerCase().includes(search.toLowerCase()) ||
-          elm.body.toLowerCase().includes(search.toLowerCase())
-        );
-      });
-      // setBlogPosts(filteredData);
-    }
-  };
   return (
     <div>
-      Post
+      Blog
       <label htmlFor="search">
         Search by Title:
-        <input id="search" type="text" onChange={handleSearch} value={search} />
+        <input
+          id="search"
+          type="text"
+          onChange={handleSearch}
+          value={search}
+          style={{ marginRight: "25px" }}
+        />
       </label>
-      {post_item?.data?.data ? (
+      {/* <button className="btn btn-primary">  </button> */}
+      <Link to="/bloglist/addblog" className="btn btn-primary">
+        Add
+      </Link>
+      {blogs_item?.data?.data ? (
         <div className="blog-content-section">
-          <Table striped bordered hover>
+          <table>
             <thead>
               <tr>
-                <th>#</th>
+                <th>Id</th>
                 <th>Title </th>
                 <th>Body </th>
               </tr>
@@ -87,22 +88,34 @@ export default function Post() {
             <tbody>
               {currentPost
                 ?.filter((items) =>
-                  items?.title?.toLowerCase().includes(search.toLowerCase())
+                  items.title.toLowerCase().includes(search.toLowerCase())
                 )
                 ?.map((item, item_key) => {
                   return (
                     <tr key={item_key}>
-                      <td>{item.id} </td>
-                      <td>{item.title} </td>
-                      <td>{item.body} </td>
+                      <td style={{ width: "100px" }}>{item.id + 1} </td>
+                      <td style={{ width: "330px" }}>{item.title} </td>
+                      <td style={{ width: "330px", padding: "5px" }}>
+                        {item.body}{" "}
+                      </td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteData(item.id)}
+                      >
+                        Delete{" "}
+                      </button>
+                      <button className="btn btn-success">
+                        {" "}
+                        <Link to={`/bloglist/edit/${item.id}`}>Edit</Link>
+                      </button>
                     </tr>
                   );
                 })}
             </tbody>
-          </Table>
+          </table>
           <Pagination
             postsPerPage={postsPerPage}
-            totalPosts={post_item?.data?.data.length}
+            totalPosts={blogs_item?.data?.data.length}
             paginate={paginate}
             handlePrevPageClick={previousPage}
             handleNextPageClick={nextPage}

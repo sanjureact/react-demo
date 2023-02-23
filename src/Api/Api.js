@@ -87,3 +87,12 @@ export const apiInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const postApi = async (endpoint, payload, options = {}) => {
+  try {
+    const response = await apiInstance.post(endpoint, payload, options);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
