@@ -3,17 +3,9 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-export default function Layout() {
+export default function Layout({ children }) {
   return (
     <>
-      {/* <div >
-        <Header />
-        <Sidebar />
-        <Outlet />
-      </div>
-      <div>
-        <Footer />
-      </div> */}
       <div className="parent">
         <div className="child">
           {" "}
@@ -24,10 +16,12 @@ export default function Layout() {
             {" "}
             <Sidebar />
           </div>
+
           <div className="child content">
             <Outlet />
           </div>
         </div>
+        {children}
         <div className="child">
           {" "}
           <Footer />

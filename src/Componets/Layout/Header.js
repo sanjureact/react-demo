@@ -32,7 +32,7 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarExample01">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item active">
-                  <Link to="/" className="nav-link">
+                  <Link to="/dashbord" className="nav-link">
                     Dashboard
                   </Link>
                 </li>
@@ -57,9 +57,14 @@ export default function Header() {
                   </a>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/profile">
+                    Profile
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <button type="button" className="btn btn" onClick={logout}>
                     {" "}
-                    logout
+                    Logout
                   </button>
                 </li>
               </ul>

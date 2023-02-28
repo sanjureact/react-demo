@@ -4,7 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loginAction } from "../Redux/Action/AuthAction";
-import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
@@ -12,7 +15,6 @@ export default function Login() {
   });
 
   const [message, setMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -21,16 +23,34 @@ export default function Login() {
     (state) => state.AuthLoginStateData
   );
 
-  // console.log(login_status, login_loading);
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required()
+      .email("Invalid email")
+      .required("email required"),
+    password: Yup.string().required("password required"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: yupResolver(validationSchema),
+  });
+  const onSubmit = (data) => {
+    dispatch(loginAction(data));
+    setTimeout(() => {
+      navigate(state?.path || "/dashbord");
+      // navigate(state?.path || "/");
+    }, 500);
+    console.log(data);
+  };
 
-  // useEffect(() => {
-  //   let usertoken = JSON.parse(localStorage.getItem("user"));
-  //   if (!usertoken) {
-  //     return;
-
-  //   }
-  // }, [login_status, login_loading]);
-
+  //=> without react-hook useform
   const submitForm = (e) => {
     e.preventDefault();
     setMessage(true);
@@ -48,30 +68,30 @@ export default function Login() {
     console.log(value);
   };
 
-  // without redux
-  const handlSubmit = (e) => {
-    e.preventDefault();
-    setMessage(true);
-    axios
-      .post("https://reqres.in/api/login", user)
-      .then((res) => {
-        const data = res.data;
-        const token = data.token;
-        if (!token) {
-          alert("Unable to login. Please try after some time.");
-          return;
-        }
-        localStorage.setItem("user", JSON.stringify(token));
+  //=> without redux form
+  // const handlSubmit = (e) => {
+  //   e.preventDefault();
+  //   setMessage(true);
+  //   axios
+  //     .post("https://reqres.in/api/login", user)
+  //     .then((res) => {
+  //       const data = res.data;
+  //       const token = data.token;
+  //       if (!token) {
+  //         alert("Unable to login. Please try after some time.");
+  //         return;
+  //       }
+  //       localStorage.setItem("user", JSON.stringify(token));
 
-        setTimeout(() => {
-          navigate("/");
-        }, 500);
-      })
-      .catch((error) => {
-        console.log(error, "err");
-        alert("Oops! Some error occured.");
-      });
-  };
+  //       setTimeout(() => {
+  //         navigate("/");
+  //       }, 500);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error, "err");
+  //       alert("Oops! Some error occured.");
+  //     });
+  // };
 
   return (
     <>
@@ -87,7 +107,7 @@ export default function Login() {
               >
                 <form
                   className="card-body p-5 text-center"
-                  onSubmit={submitForm}
+                  onSubmit={handleSubmit(onSubmit)}
                 >
                   <h3 className="mb-5">Sign in</h3>
 
@@ -99,13 +119,17 @@ export default function Login() {
                       type="email"
                       id="typeEmailX-2"
                       className="form-control form-control-lg"
-                      name="email"
-                      value={user.email}
-                      onChange={handOnchange}
+                      // name="email"
+                      // value={user.email}
+                      // onChange={handOnchange}
+                      {...register("email")}
                     />
-                    {message && !user.email && (
+
+                    <p style={{ color: "red" }}>{errors?.email?.message} </p>
+
+                    {/* {message && !user.email && (
                       <p style={{ color: "red" }}> email required</p>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="form-outline mb-4">
@@ -116,13 +140,16 @@ export default function Login() {
                       type="password"
                       id="typePasswordX-2"
                       className="form-control form-control-lg"
-                      name="password"
-                      value={user.password}
-                      onChange={handOnchange}
+                      // name="password"
+                      // value={user.password}
+                      // onChange={handOnchange}
+                      {...register("password")}
                     />
-                    {message && !user.password && (
-                      <p style={{ color: "red" }}> enter password</p>
-                    )}
+
+                    <p style={{ color: "red" }}>
+                      {" "}
+                      {errors?.password?.message}{" "}
+                    </p>
                   </div>
 
                   <div className="form-check d-flex justify-content-start mb-4">

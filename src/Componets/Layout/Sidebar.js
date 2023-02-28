@@ -19,7 +19,7 @@ export default function Sidebar() {
                 to="/"
                 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
-                <span className="fs-5 d-none d-sm-inline">Menu</span>
+                <span className="fs-5 d-none d-sm-inline">Home</span>
               </Link>
               <ul
                 className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
@@ -27,7 +27,7 @@ export default function Sidebar() {
               >
                 <li>
                   <Link
-                    to="/"
+                    to="/dashbord"
                     data-bs-toggle="collapse"
                     className="nav-link px-0 align-middle"
                   >
@@ -106,7 +106,7 @@ export default function Sidebar() {
                   <li>
                     <Link to="#" className="nav-link px-0 align-middle">
                       <i className="fs-4 bi-people"></i>{" "}
-                      <span className="ms-1 d-none d-sm-inline">Customers</span>{" "}
+                      <span className="ms-1 d-none d-sm-inline">Cart </span>{" "}
                     </Link>
                   </li>
                   <Link to="#" className="nav-link px-0 align-middle">

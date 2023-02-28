@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -24,39 +25,34 @@ export default function Home() {
           <div className="collapse navbar-collapse" id="navbarExample01">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item active">
-                <a className="nav-link" aria-current="page" href="#intro">
+                <Link className="nav-link" to="#">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/signup"
-                  rel="nofollow"
-                  target="_blank"
-                >
+                <Link className="nav-link" to="/signup">
                   SignUp
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/login"
-                  rel="nofollow"
-                  target="_blank"
-                >
+                <Link className="nav-link" to="/login">
                   Login
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link className="nav-link" to="/profile">
+                  Profile
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
                   className="nav-link"
-                  href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
+                  to="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
                   rel="nofollow"
                   target="_blank"
                 >
                   Learn redux
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Base_Url } from "../Config/Config";
-import { toast } from "react-toastify";
 
 export const instancseApi = axios.create({
   baseURL: Base_Url,
@@ -87,12 +86,3 @@ export const apiInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-export const postApi = async (endpoint, payload, options = {}) => {
-  try {
-    const response = await apiInstance.post(endpoint, payload, options);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};

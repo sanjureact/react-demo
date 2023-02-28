@@ -57,6 +57,9 @@ export default function Bloglist() {
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
+  const filteredData = currentPost?.filter((items) =>
+    items.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
@@ -86,31 +89,27 @@ export default function Bloglist() {
               </tr>
             </thead>
             <tbody>
-              {currentPost
-                ?.filter((items) =>
-                  items.title.toLowerCase().includes(search.toLowerCase())
-                )
-                ?.map((item, item_key) => {
-                  return (
-                    <tr key={item_key}>
-                      <td style={{ width: "100px" }}>{item.id + 1} </td>
-                      <td style={{ width: "330px" }}>{item.title} </td>
-                      <td style={{ width: "330px", padding: "5px" }}>
-                        {item.body}{" "}
-                      </td>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => deleteData(item.id)}
-                      >
-                        Delete{" "}
-                      </button>
-                      <button className="btn btn-success">
-                        {" "}
-                        <Link to={`/bloglist/edit/${item.id}`}>Edit</Link>
-                      </button>
-                    </tr>
-                  );
-                })}
+              {filteredData?.map((item, item_key) => {
+                return (
+                  <tr key={item_key}>
+                    <td style={{ width: "100px" }}>{item.id + 1} </td>
+                    <td style={{ width: "330px" }}>{item.title} </td>
+                    <td style={{ width: "330px", padding: "5px" }}>
+                      {item.body}{" "}
+                    </td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteData(item.id)}
+                    >
+                      Delete{" "}
+                    </button>
+                    <button className="btn btn-success">
+                      {" "}
+                      <Link to={`/bloglist/edit/${item.id}`}>Edit</Link>
+                    </button>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <Pagination
