@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import img1 from "../assets/p7.jpg";
 export default function Home() {
   return (
-    <div>
+    <>
       <nav
         className="navbar navbar-expand-lg fixed-top navbar-scroll"
-        style={{ backgroundColor: "blanchedalmond" }}
+        style={{ backgroundColor: "rgb(221, 221, 220)", position: "sticky" }}
       >
         <div className="container-fluid">
           <button
@@ -29,6 +29,58 @@ export default function Home() {
                   Home
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to="/yoga-classes"
+                  // rel="nofollow"
+                  // target="_blank"
+                >
+                  Yoga Classes
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/meditation">
+                  Meditation
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/pranayama">
+                  Pranayama
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/courses">
+                  Courses
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/challanges">
+                  Challanges
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/teachers">
+                  Our Teachers
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/articles">
+                  Articles
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/language">
+                  Language
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/primium-trainings">
+                  Primium Trainings
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/signup">
                   SignUp
@@ -39,25 +91,43 @@ export default function Home() {
                   Login
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  Profile
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                  rel="nofollow"
-                  target="_blank"
-                >
-                  Learn redux
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
       </nav>
-    </div>
+      <section>
+        <img src={img1} alt="pic" style={{ height: "155px", width: "155px" }} />
+        <div className="row">
+          <div className="col">fdf</div>
+          {/* <div className="col-6"> */}
+
+          {/* </div> */}
+        </div>
+      </section>
+      <section>
+        <div className="row">
+          <div className="col-3">fdf</div>
+          <div className="col-3">fdf</div>
+          <div className="col-3">fdf</div>
+        </div>
+      </section>
+      <section>
+        <div className="row">
+          <div className="col-3">fdf</div>
+          <div className="col-3">fdf</div>
+          <div className="col-3">fdf</div>
+        </div>
+      </section>
+
+      <footer className="text-center">
+        <div
+          className="text-center p-4"
+          style={{ backgroundColor: "#d9d9d9", width: "1389px" }}
+        >
+          © 2021 Copyright:
+          <a className="text-reset fw-bold">theme by bootstrap</a>
+        </div>
+      </footer>
+    </>
   );
 }
